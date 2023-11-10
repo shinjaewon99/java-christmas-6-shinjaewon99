@@ -15,4 +15,12 @@ class CustomerTest {
         assertThatThrownBy(() -> new Customer(date))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @DisplayName("방문 날짜가 1 이상 31 이하가 아닌 경우 예외가 발생한다.")
+    @ValueSource(strings = {"0", "32", "54"})
+    @ParameterizedTest
+    void Invalid_DateNumber_Not_Exist(String date) {
+        assertThatThrownBy(() -> new Customer(date))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 }
