@@ -23,4 +23,12 @@ class CustomerTest {
         assertThatThrownBy(() -> new Customer(date))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @DisplayName("방문 날짜 입력시 공백이 존재하면 예외가 발생한다.")
+    @ValueSource(strings = {" 1", "3 1", "", " "})
+    @ParameterizedTest
+    void Invalid_DateNumber_Blank(String date) {
+        assertThatThrownBy(() -> new Customer(date))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 }
