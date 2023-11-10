@@ -2,10 +2,7 @@ package christmas.domain;
 
 import christmas.menu.Order;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 import java.util.regex.Pattern;
 
 public class OrderStore {
@@ -13,6 +10,7 @@ public class OrderStore {
     private static final String MENU_EXCEPTION_MESSAGE = "[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.";
     private static final int MINIMUM_MENU_COUNT = 1;
     private static final Pattern NUMBER_MATCH = Pattern.compile("^[0-9]*$");
+    private final Map<String, Integer> orderStore = new HashMap<>();
     private final List<String> menuStore = new ArrayList<>();
 
     public void createMenuOrder(String inputMenu) {
@@ -23,6 +21,7 @@ public class OrderStore {
             String[] menuDetails = menuOrder.split("-");
             validateMenu(menuDetails);
             validateMenuCount(menuDetails);
+            createOrderStore(menuDetails);
         }
         validateMenuDuplicate(menuStore);
     }
@@ -43,6 +42,25 @@ public class OrderStore {
         for (int i = 1; i < menuDetails.length; i += 2) {
             validateMenuCountType(menuDetails[i]);
             validateMenuCount(toInt(menuDetails[i]));
+        }
+    }
+
+    private void createOrderStore(String[] menuDetails) {
+        for (String detail : menuDetails) {
+            validateInputBlank(detail);
+            settingOrderStore(detail);
+        }
+    }
+
+    private void settingOrderStore(String detail) {
+        for (int i = 0; i < detail.length(); i++) {
+            addOrderStore(detail);
+        }
+    }
+
+    private void addOrderStore(String menu) {
+        if (!NUMBER_MATCH.matcher(menu).matches()) {
+            orderStore.put(menu, orderStore.getOrDefault(menu, 0) + 1);
         }
     }
 
@@ -87,6 +105,10 @@ public class OrderStore {
 
     private int toInt(String input) {
         return Integer.parseInt(input);
+    }
+
+    public Map<String, Integer> getOrderStore() {
+        return orderStore;
     }
 
     public List<String> getMenuStore() {
