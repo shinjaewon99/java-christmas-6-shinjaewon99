@@ -17,4 +17,12 @@ class OrderStoreTest {
         assertThatThrownBy(() -> orderStore.createMenuOrder(menu))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @DisplayName("메뉴의 개수가 1 이상이 아닌 경우 예외가 발생한다.")
+    @ValueSource(strings = {"제로콜라-0, 초코케이크-1,아이스크림-5", "레드와인-5,티본스테이크-0", "시저샐러드-0"})
+    @ParameterizedTest
+    void Invalid_Menu_Count(String menu) {
+        assertThatThrownBy(() -> orderStore.createMenuOrder(menu))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 }
