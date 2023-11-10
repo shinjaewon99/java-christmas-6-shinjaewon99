@@ -25,4 +25,12 @@ class OrderStoreTest {
         assertThatThrownBy(() -> orderStore.createMenuOrder(menu))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @DisplayName("메뉴의 형식이 예시와 다른 경우 예외가 발생한다.")
+    @ValueSource(strings = {"제로콜라 -3, 초코케이크-1,아이스크림-5", "레드 와인-5,티본스테이크-4", "샴페인4", "제로콜라-a", "", " "})
+    @ParameterizedTest
+    void Invalid_Menu_Form(String menu) {
+        assertThatThrownBy(() -> orderStore.createMenuOrder(menu))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 }
