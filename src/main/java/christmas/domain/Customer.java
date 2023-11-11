@@ -4,8 +4,7 @@ import java.util.regex.Pattern;
 
 public class Customer {
     private static final String VISIT_DATE_BLANK_EXCEPTION_MESSAGE = "[ERROR] 공백 없이 입력해야 합니다. 다시 입력해 주세요.";
-    private static final String VISIT_DATE_RANGE_EXCEPTION_MESSAGE = "[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.";
-    private static final String VISIT_DATE_TYPE_EXCEPTION_MESSAGE = "[ERROR] 자연수를 입력해야 합니다. 다시 입력해 주세요.";
+    private static final String VISIT_INPUT_DATE_EXCEPTION_MESSAGE = "[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.";
     private static final Pattern NUMBER_MATCH = Pattern.compile("^[0-9]*$");
     private static final int DATE_START_NUMBER = 1;
     private static final int DATE_END_NUMBER = 31;
@@ -29,12 +28,12 @@ public class Customer {
 
     private void validateVisitDateType(String inputDate) {
         if (!NUMBER_MATCH.matcher(inputDate).matches())
-            throw new IllegalArgumentException(VISIT_DATE_TYPE_EXCEPTION_MESSAGE);
+            throw new IllegalArgumentException(VISIT_INPUT_DATE_EXCEPTION_MESSAGE);
     }
 
     private void validateVisitDateRange(int inputDate) {
         if (!(inputDate >= DATE_START_NUMBER && inputDate <= DATE_END_NUMBER))
-            throw new IllegalArgumentException(VISIT_DATE_RANGE_EXCEPTION_MESSAGE);
+            throw new IllegalArgumentException(VISIT_INPUT_DATE_EXCEPTION_MESSAGE);
     }
 
     private int toInt(String inputDate) {
