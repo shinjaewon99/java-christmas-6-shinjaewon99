@@ -23,6 +23,8 @@ public class PromotionController {
         settingGiveMenu();
         settingTotalBenefit();
         settingTotalBenefitMoney();
+        settingAfterDiscountTotalMoney();
+        settingEventBadge();
     }
 
     private void customerInput() {
@@ -82,5 +84,13 @@ public class PromotionController {
 
     private void settingTotalBenefitMoney() {
         outputView.printTotalBenefitMoney(service.isTotalBenefitMoneyZero(), service.getTotalBenefitMoney());
+    }
+
+    private void settingAfterDiscountTotalMoney() {
+        outputView.printAfterDiscount(service.getAfterDiscountTotalMoney());
+    }
+
+    private void settingEventBadge() {
+        outputView.printEventBadge(service.getEventBadge());
     }
 }
