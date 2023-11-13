@@ -14,12 +14,21 @@ public class BenefitDetails {
     private static final int WEEKEND_FRIDAY_NUMBER = 1;
     private static final int WEEKEND_SATURDAY_NUMBER = 2;
     private static final int BADGE_LOCATION_NUMBER = 3;
+    private static final int MINIMUM_SANTA_BADGE_NUMBER = 20_000;
+    private static final int MINIMUM_TREE_BADGE_NUMBER = 10_000;
+    private static final int MINIMUM_START_BADGE_NUMBER = 5_000;
     private static final String MENU_TYPE_DESSERT = "DESSERT";
     private static final String MENU_TYPE_MAIN = "MAIN";
+    private static final String SANTA_BADGE = "산타";
+    private static final String TREE_BADGE = "트리";
+    private static final String START_BADGE = "별";
+    private static final String NOTHING_BADGE = "없음";
+
     private int dDayDiscount;
     private int weekdayDiscount;
     private int weekendDiscount;
     private int specialDiscount;
+    private String eventBadge;
 
     public boolean minimumTotalMoney(int beforeTotalMoney) {
         return beforeTotalMoney >= MINIMUM_ORDER_MONEY;
@@ -56,6 +65,22 @@ public class BenefitDetails {
             specialDiscount += SPECIAL_DISCOUNT_MONEY;
         }
         return specialDiscount;
+    }
+
+    public String calculateEventBadge(int totalBenefitMoney) {
+        if (totalBenefitMoney >= MINIMUM_SANTA_BADGE_NUMBER) {
+            eventBadge = SANTA_BADGE;
+        }
+        if (totalBenefitMoney >= MINIMUM_TREE_BADGE_NUMBER && totalBenefitMoney < MINIMUM_SANTA_BADGE_NUMBER) {
+            eventBadge = TREE_BADGE;
+        }
+        if (totalBenefitMoney >= MINIMUM_START_BADGE_NUMBER && totalBenefitMoney < MINIMUM_TREE_BADGE_NUMBER) {
+            eventBadge = START_BADGE;
+        }
+        if (totalBenefitMoney < MINIMUM_START_BADGE_NUMBER) {
+            eventBadge = NOTHING_BADGE;
+        }
+        return eventBadge;
     }
 
     public boolean checkWeekday(int date) {
