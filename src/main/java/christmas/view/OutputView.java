@@ -8,9 +8,14 @@ public class OutputView {
     private static final String BEFORE_DISCOUNT_TOTAL_MONEY_MESSAGE = "<할인 전 총주문 금액> \n%s원\n";
     private static final String GIVE_MENU_MESSAGE = "<증정 메뉴>";
     private static final String GIVE_CHAMPAGNE = "샴페인 1개";
-    private static final String GIVE_NOTHING = "없음";
+    private static final String NOTHING_MESSAGE = "없음\n";
+    private static final String TOTAL_BENEFIT_MESSAGE = "<혜택 내역>";
+    private static final String D_DAY_DISCOUNT_MESSAGE = "크리스마스 디데이 할인 : -%s원\n";
+    private static final String WEEKDAY_DISCOUNT_MESSAGE = "평일 할인 : -%s원\n";
+    private static final String WEEKEND_DISCOUNT_MESSAGE = "주말 할인 : -%s원\n";
+    private static final String SPECIAL_DISCOUNT_MESSAGE = "특별 할인 : -%s원\n";
 
-    public void printHello() {
+    public void printHelloRestaurantOpen() {
         System.out.println(HELLO_RESTAURANT_MESSAGE);
     }
 
@@ -32,14 +37,47 @@ public class OutputView {
         System.out.printf(BEFORE_DISCOUNT_TOTAL_MONEY_MESSAGE, money);
     }
 
-    public void printGiveMenu(boolean isGive) {
+    public void printGiveMenu(boolean isGiveChampagne) {
         printEmptyLine();
         System.out.println(GIVE_MENU_MESSAGE);
-        if(isGive){
+        if (isGiveChampagne) {
             System.out.println(GIVE_CHAMPAGNE);
         }
-        if(!isGive){
-            System.out.println(GIVE_NOTHING);
+        if (!isGiveChampagne) {
+            System.out.println(NOTHING_MESSAGE);
+        }
+    }
+
+    public void printTotalBenefit(boolean isBenefit) {
+        printEmptyLine();
+        System.out.println(TOTAL_BENEFIT_MESSAGE);
+
+        if (!isBenefit) {
+            System.out.println(NOTHING_MESSAGE);
+        }
+    }
+
+    public void printdDayDiscount(boolean isdDayDiscountZero, String dDayDiscount) {
+        if (isdDayDiscountZero) {
+            System.out.printf(D_DAY_DISCOUNT_MESSAGE, dDayDiscount);
+        }
+    }
+
+    public void printWeekdayDiscount(boolean isWeekDayDiscountZero, String weekdayDiscount) {
+        if (isWeekDayDiscountZero) {
+            System.out.printf(WEEKDAY_DISCOUNT_MESSAGE, weekdayDiscount);
+        }
+    }
+
+    public void printWeekendDiscount(boolean isWeekendDiscountZero, String weekdayDiscount) {
+        if (isWeekendDiscountZero) {
+            System.out.printf(WEEKEND_DISCOUNT_MESSAGE, weekdayDiscount);
+        }
+    }
+
+    public void printSpecialDiscount(boolean isSpecialDiscountZero, String specialDiscount) {
+        if (isSpecialDiscountZero) {
+            System.out.printf(SPECIAL_DISCOUNT_MESSAGE, specialDiscount);
         }
     }
 
