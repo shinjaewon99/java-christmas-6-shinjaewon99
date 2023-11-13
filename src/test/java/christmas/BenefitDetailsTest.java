@@ -72,4 +72,16 @@ class BenefitDetailsTest {
     void not_Apply_Special_Discount() {
         assertThat(0).isEqualTo(benefitDetails.calculateSpecialDiscount(20));
     }
+
+    @DisplayName("고객이 입력한 방문 날짜가 평일인지 확인 ")
+    @Test
+    void customer_Visit_WeekDay() {
+        assertThat(true).isEqualTo(benefitDetails.checkWeekday(13));
+    }
+
+    @DisplayName("고객이 입력한 방문 날짜가 주말인지 확인 ")
+    @Test
+    void customer_Visit_Weekend() {
+        assertThat(true).isEqualTo(benefitDetails.checkWeekend(1));
+    }
 }
