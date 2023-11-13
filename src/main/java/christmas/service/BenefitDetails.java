@@ -8,9 +8,11 @@ public class BenefitDetails {
     private static final int INCREASE_DISCOUNT_MONEY = 100;
     private static final int CHRISTMAS_DATE = 25;
     private static final int DISCOUNT_MONEY = 2023;
+    private static final int SPECIAL_DISCOUNT_MONEY = 1_000;
     private int dDayDiscount;
     private int weekdayDiscount;
     private int weekendDiscount;
+    private int specialDiscount;
 
     public boolean minimumTotalMoney(int beforeTotalMoney) {
         return beforeTotalMoney >= MINIMUM_ORDER_MONEY;
@@ -43,6 +45,13 @@ public class BenefitDetails {
             }
         }
         return weekendDiscount;
+    }
+
+    public int calculateSpecialDiscount(int date) {
+        if (date % 7 == 3 || date == CHRISTMAS_DATE) {
+            specialDiscount += SPECIAL_DISCOUNT_MONEY;
+        }
+        return specialDiscount;
     }
 
     public boolean checkWeekday(int date) {
