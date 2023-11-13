@@ -60,4 +60,16 @@ class BenefitDetailsTest {
     void not_Apply_Main_Discount() {
         assertThat(0).isEqualTo(benefitDetails.calculatedWeekendDiscount("시저샐러드", 5));
     }
+
+    @DisplayName("이벤트 달력에 별이 있으면 1_000원 할인")
+    @Test
+    void apply_Special_Discount() {
+        assertThat(1_000).isEqualTo(benefitDetails.calculateSpecialDiscount(3));
+    }
+
+    @DisplayName("이벤트 달력에 별이 없으면 0원 할인")
+    @Test
+    void not_Apply_Special_Discount() {
+        assertThat(0).isEqualTo(benefitDetails.calculateSpecialDiscount(20));
+    }
 }
