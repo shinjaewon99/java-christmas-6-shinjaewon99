@@ -2,16 +2,23 @@ package christmas.domain;
 
 import christmas.menu.Order;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
 import java.util.regex.Pattern;
 
 public class OrderStore {
     private static final String INPUT_BLANK_EXCEPTION_MESSAGE = "[ERROR] 공백 없이 입력해야 합니다. 다시 입력해 주세요.";
+    private static final String MAX_MENU_COUNT_EXCEPTION_MESSAGE = "[ERROR] 메뉴는 한번에 최대 20개까지만 가능합니다. 다시 입력해 주세요.";
     private static final String MENU_EXCEPTION_MESSAGE = "[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.";
     private static final int MINIMUM_MENU_COUNT = 1;
+    private static final int TOTAL_MENU_COUNT_RESET_NUMBER = 0;
+    private static final int LIMIT_MAX_MENU_COUNT_NUMBER = 20;
     private static final Pattern NUMBER_MATCH = Pattern.compile("^[0-9]*$");
     private final List<String> menuStore = new ArrayList<>();
     private final List<Integer> menuCountStore = new ArrayList<>();
+    private int totalMenuCount;
 
     public void createMenuOrder(String inputMenu) {
         resetMenuStore();
@@ -22,6 +29,7 @@ public class OrderStore {
             validateMenu(menuDetails);
             validateMenuCount(menuDetails);
         }
+        validateMaxOrderMenuCount();
         validateMenuDuplicate(menuStore);
     }
 
@@ -65,6 +73,16 @@ public class OrderStore {
             throw new IllegalArgumentException(MENU_EXCEPTION_MESSAGE);
     }
 
+    private void validateMaxOrderMenuCount() {
+        for (int count : menuCountStore) {
+            totalMenuCount += count;
+        }
+        if (totalMenuCount > LIMIT_MAX_MENU_COUNT_NUMBER) {
+            resetMenuCountStatus();
+            throw new IllegalArgumentException(MAX_MENU_COUNT_EXCEPTION_MESSAGE);
+        }
+    }
+
     private void validateMenuExist(String inputMenu) {
         if (!isMenuExist(inputMenu))
             throw new IllegalArgumentException(MENU_EXCEPTION_MESSAGE);
@@ -82,6 +100,11 @@ public class OrderStore {
 
     private void resetMenuStore() {
         menuStore.clear();
+    }
+
+    private void resetMenuCountStatus() {
+        totalMenuCount = TOTAL_MENU_COUNT_RESET_NUMBER;
+        menuCountStore.clear();
     }
 
     private int toInt(String input) {
