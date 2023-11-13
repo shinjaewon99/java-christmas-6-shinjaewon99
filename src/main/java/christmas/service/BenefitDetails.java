@@ -10,6 +10,7 @@ public class BenefitDetails {
     private static final int DISCOUNT_MONEY = 2023;
     private int dDayDiscount;
     private int weekdayDiscount;
+    private int weekendDiscount;
 
     public boolean minimumTotalMoney(int beforeTotalMoney) {
         return beforeTotalMoney >= MINIMUM_ORDER_MONEY;
@@ -33,7 +34,22 @@ public class BenefitDetails {
         return weekdayDiscount;
     }
 
+    public int calculatedWeekendDiscount(String menu, int count) {
+        for (OrderType type : OrderType.values()) {
+            if (type.getName().equals(menu) && type.getMenuType().equals("MAIN")) {
+                for (int i = 0; i < count; i++) {
+                    weekendDiscount += DISCOUNT_MONEY;
+                }
+            }
+        }
+        return weekendDiscount;
+    }
+
     public boolean checkWeekday(int date) {
         return !(date % 7 == 1 || date % 7 == 2);
+    }
+
+    public boolean checkWeekend(int date) {
+        return date % 7 == 1 || date % 7 == 2;
     }
 }
