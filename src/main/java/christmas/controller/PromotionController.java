@@ -17,6 +17,9 @@ public class PromotionController {
 
     public void play() {
         customerInput();
+        settingEventPreview();
+        settingOrderMenu();
+        settingBeforeTotalMoney();
     }
 
     private void customerInput() {
@@ -43,5 +46,20 @@ public class PromotionController {
             outputView.printExceptionMessage(exception.getMessage());
             inputMenuOrder();
         }
+    }
+
+    private void settingEventPreview() {
+        outputView.printEventPreview(service.getVisitDate());
+    }
+
+    private void settingOrderMenu() {
+        outputView.printOrderMenu();
+        for (int i = 0; i < service.getMenuStore().size(); i++) {
+            outputView.printOrderMenuDetails(service.getMenuStore().get(i), service.getMenuCountStore().get(i));
+        }
+    }
+
+    private void settingBeforeTotalMoney() {
+        outputView.printBeforeDiscount(service.createBeforeTotalMoney());
     }
 }
