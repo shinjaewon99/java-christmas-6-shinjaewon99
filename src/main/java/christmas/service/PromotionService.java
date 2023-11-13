@@ -15,6 +15,7 @@ public class PromotionService {
     private static final NumberFormat NUMBER_FORMAT = NumberFormat.getInstance();
     private final OrderStore orderStore = new OrderStore();
     private final BenefitDetails benefitDetails = new BenefitDetails();
+    private final EventBadge eventBadge = new EventBadge();
     private Customer customer;
     private int beforeTotalMoney;
     private int dDayDiscount;
@@ -22,6 +23,7 @@ public class PromotionService {
     private int weekendDiscount;
     private int specialDiscount;
     private int totalBenefitMoney;
+    private int afterDiscountTotalMoney;
 
     public void createVisitDate(String inputDate) {
         customer = new Customer(inputDate);
@@ -35,6 +37,7 @@ public class PromotionService {
         if (isMinimumTotalMoney()) {
             discountStatus();
         }
+        calculateAfterDiscountTotalMoney();
     }
 
     private void discountStatus() {
@@ -97,6 +100,14 @@ public class PromotionService {
         return totalBenefitMoney = dDayDiscount + weekdayDiscount + weekendDiscount + specialDiscount;
     }
 
+    private void calculateAfterDiscountTotalMoney() {
+        afterDiscountTotalMoney = beforeTotalMoney - dDayDiscount - weekdayDiscount - weekendDiscount - specialDiscount;
+    }
+
+    public String getEventBadge() {
+        return eventBadge.calculateEventBadge(totalBenefitMoney);
+    }
+
     public boolean isBeforeTotalMoney() {
         return beforeTotalMoney >= MINIMUM_GIVE_MENU_MONEY;
     }
@@ -119,6 +130,14 @@ public class PromotionService {
 
     public String getSpecialDiscount() {
         return formatDiscount(specialDiscount);
+    }
+
+    public String getTotalBenefitMoney() {
+        return formatDiscount(totalBenefitMoney);
+    }
+
+    public String getAfterDiscountTotalMoney() {
+        return formatDiscount(afterDiscountTotalMoney);
     }
 
     public boolean isdDayDiscountDiscountZero() {
