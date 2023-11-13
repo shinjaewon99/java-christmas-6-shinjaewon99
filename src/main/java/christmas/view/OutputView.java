@@ -18,6 +18,7 @@ public class OutputView {
     private static final String TOTAL_BENEFIT_MONEY_POSITIVE = "<총혜택 금액> \n-%s원\n";
     private static final String TOTAL_BENEFIT_MONEY_DETAILS_ZERO = "<총혜택 금액> \n%s원\n";
     private static final String AFTER_DISCOUNT_TOTAL_MONEY_MESSAGE = "<할인 후 예상 결제 금액> \n%s원\n";
+    private static final String EVENT_BADGE_MESSAGE = "<12월 이벤트 배지>\n%s";
 
     public void printHelloRestaurantOpen() {
         System.out.println(HELLO_RESTAURANT_MESSAGE);
@@ -104,6 +105,11 @@ public class OutputView {
     public void printAfterDiscount(String afterDiscountTotalMoney) {
         printEmptyLine();
         System.out.printf(AFTER_DISCOUNT_TOTAL_MONEY_MESSAGE, afterDiscountTotalMoney);
+    }
+
+    public void printEventBadge(String eventBadge) {
+        printEmptyLine();
+        System.out.printf(EVENT_BADGE_MESSAGE, eventBadge);
     }
 
     public void printExceptionMessage(String message) {
