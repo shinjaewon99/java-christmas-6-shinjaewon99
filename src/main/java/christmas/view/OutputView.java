@@ -14,6 +14,10 @@ public class OutputView {
     private static final String WEEKDAY_DISCOUNT_MESSAGE = "평일 할인 : -%s원\n";
     private static final String WEEKEND_DISCOUNT_MESSAGE = "주말 할인 : -%s원\n";
     private static final String SPECIAL_DISCOUNT_MESSAGE = "특별 할인 : -%s원\n";
+    private static final String GIVE_EVENT_DISCOUNT_MESSAGE = "증정 이벤트 : -%s원\n";
+    private static final String TOTAL_BENEFIT_MONEY_POSITIVE = "<총혜택 금액> \n-%s원\n";
+    private static final String TOTAL_BENEFIT_MONEY_DETAILS_ZERO = "<총혜택 금액> \n%s원\n";
+    private static final String AFTER_DISCOUNT_TOTAL_MONEY_MESSAGE = "<할인 후 예상 결제 금액> \n%s원\n";
 
     public void printHelloRestaurantOpen() {
         System.out.println(HELLO_RESTAURANT_MESSAGE);
@@ -79,6 +83,27 @@ public class OutputView {
         if (isSpecialDiscountZero) {
             System.out.printf(SPECIAL_DISCOUNT_MESSAGE, specialDiscount);
         }
+    }
+
+    public void printEventDiscount(boolean isBeforeTotalMoney, String event) {
+        if (isBeforeTotalMoney) {
+            System.out.printf(GIVE_EVENT_DISCOUNT_MESSAGE, event);
+        }
+    }
+
+    public void printTotalBenefitMoney(boolean isTotalBenefitMoneyZero, String totalBenefitMoney) {
+        printEmptyLine();
+        if (isTotalBenefitMoneyZero) {
+            System.out.printf(TOTAL_BENEFIT_MONEY_POSITIVE, totalBenefitMoney);
+        }
+        if (!isTotalBenefitMoneyZero) {
+            System.out.printf(TOTAL_BENEFIT_MONEY_DETAILS_ZERO, totalBenefitMoney);
+        }
+    }
+
+    public void printAfterDiscount(String afterDiscountTotalMoney) {
+        printEmptyLine();
+        System.out.printf(AFTER_DISCOUNT_TOTAL_MONEY_MESSAGE, afterDiscountTotalMoney);
     }
 
     public void printExceptionMessage(String message) {
