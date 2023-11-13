@@ -20,6 +20,9 @@ public class PromotionController {
         settingEventPreview();
         settingOrderMenu();
         settingBeforeTotalMoney();
+        settingGiveMenu();
+        settingTotalBenefit();
+        settingTotalBenefitMoney();
     }
 
     private void customerInput() {
@@ -61,5 +64,23 @@ public class PromotionController {
 
     private void settingBeforeTotalMoney() {
         outputView.printBeforeDiscount(service.createBeforeTotalMoney());
+    }
+
+    private void settingGiveMenu() {
+        outputView.printGiveMenu(service.isGiveMenu());
+    }
+
+    private void settingTotalBenefit() {
+        service.checkMinimumTotalMoney();
+        outputView.printTotalBenefit(service.isMinimumTotalMoney());
+        outputView.printdDayDiscount(service.isdDayDiscountDiscountZero(), service.getdDayDiscount());
+        outputView.printWeekdayDiscount(service.isWeekDayDiscountZero(), service.getWeekdayDiscount());
+        outputView.printWeekendDiscount(service.isWeekendDiscountZero(), service.getWeekendDiscount());
+        outputView.printSpecialDiscount(service.isSpecialDiscountZero(), service.getSpecialDiscount());
+        outputView.printEventDiscount(service.isBeforeTotalMoney(), service.getEventDiscount());
+    }
+
+    private void settingTotalBenefitMoney() {
+        outputView.printTotalBenefitMoney(service.isTotalBenefitMoneyZero(), service.getTotalBenefitMoney());
     }
 }
