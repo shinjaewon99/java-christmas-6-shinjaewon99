@@ -9,7 +9,7 @@ public enum Order {
     MAIN_THIRD("해산물파스타", 35_000),
     MAIN_FOURTH("크리스마스파스타", 25_000),
     DESSERT_FIRST("초코케이크", 15_000),
-    DESERT_SECOND("아이스크림", 5_000),
+    DESSERT_SECOND("아이스크림", 5_000),
     DRINK_FIRST("제로콜라", 3_000),
     DRINK_SECOND("레드와인", 60_000),
     DRINK_THIRD("샴페인", 25_000);
