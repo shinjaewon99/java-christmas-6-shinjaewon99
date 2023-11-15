@@ -34,22 +34,26 @@ public class PromotionController {
     }
 
     private void inputVisitDate() {
-        try {
-            String readDate = inputView.readDate();
-            service.createVisitDate(readDate);
-        } catch (IllegalArgumentException exception) {
-            outputView.printExceptionMessage(exception.getMessage());
-            inputVisitDate();
+        while (true) {
+            try {
+                String readDate = inputView.readDate();
+                service.createVisitDate(readDate);
+                break;
+            } catch (IllegalArgumentException exception) {
+                outputView.printExceptionMessage(exception.getMessage());
+            }
         }
     }
 
     private void inputMenuOrder() {
-        try {
-            String readMenuOrder = inputView.readMenuOrder();
-            service.createMenuOrder(readMenuOrder);
-        } catch (IllegalArgumentException exception) {
-            outputView.printExceptionMessage(exception.getMessage());
-            inputMenuOrder();
+        while (true) {
+            try {
+                String readMenuOrder = inputView.readMenuOrder();
+                service.createMenuOrder(readMenuOrder);
+                break;
+            } catch (IllegalArgumentException exception) {
+                outputView.printExceptionMessage(exception.getMessage());
+            }
         }
     }
 
