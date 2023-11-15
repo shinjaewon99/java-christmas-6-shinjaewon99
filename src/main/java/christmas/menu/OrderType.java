@@ -16,9 +16,9 @@ public enum OrderType {
     private final String name;
     private final String menuType;
 
-    OrderType(String name, String menuTye) {
+    OrderType(String name, String menuType) {
         this.name = name;
-        this.menuType = menuTye;
+        this.menuType = menuType;
     }
 
     public String getName() {
