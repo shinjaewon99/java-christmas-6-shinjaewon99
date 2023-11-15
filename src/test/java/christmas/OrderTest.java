@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class OrderTest {
-
     @DisplayName("메뉴판에 존재하는 양송이수프 이름확인")
     @Test
     void Mushroom_Soup_Name_Check() {
