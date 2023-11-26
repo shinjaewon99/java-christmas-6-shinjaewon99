@@ -15,6 +15,10 @@ public class Customer {
         this.visitDate = toInt(visitDate);
     }
 
+    public int getVisitDate() {
+        return visitDate;
+    }
+
     private void validateVisitDate(String inputDate) {
         validateVisitDateBlank(inputDate);
         validateVisitDateType(inputDate);
@@ -38,9 +42,5 @@ public class Customer {
 
     private int toInt(String inputDate) {
         return Integer.parseInt(inputDate);
-    }
-
-    public int getVisitDate() {
-        return visitDate;
     }
 }
