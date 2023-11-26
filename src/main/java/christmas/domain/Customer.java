@@ -11,22 +11,23 @@ public class Customer {
     private final int visitDate;
 
     public Customer(String visitDate) {
-        validateVisitDate(visitDate);
-        this.visitDate = toInt(visitDate);
+        this.visitDate = validateVisitDate(visitDate);
     }
 
     public int getVisitDate() {
         return visitDate;
     }
 
-    private void validateVisitDate(String inputDate) {
+    private int validateVisitDate(String inputDate) {
         validateVisitDateBlank(inputDate);
         validateVisitDateType(inputDate);
-        validateVisitDateRange(toInt(inputDate));
+        int convertDate = toInt(inputDate);
+        validateVisitDateRange(convertDate);
+        return convertDate;
     }
 
     private void validateVisitDateBlank(String inputDate) {
-        if (inputDate.contains(" ") || inputDate.equals(""))
+        if (inputDate.contains(" ") || inputDate.isBlank())
             throw new IllegalArgumentException(VISIT_DATE_BLANK_EXCEPTION_MESSAGE);
     }
 
